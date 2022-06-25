@@ -16,6 +16,7 @@ class _MyAppState extends State<MyApp> {
   String _canSendSMSMessage = 'Check is not run.';
   List<String> people = [];
   bool sendDirect = false;
+  bool sendFromDefaultSIM = false;
 
   @override
   void initState() {
@@ -31,11 +32,10 @@ class _MyAppState extends State<MyApp> {
   Future<void> _sendSMS(List<String> recipients) async {
     try {
       String _result = await FlutterSmsDual().sendSMS(
-        message: _controllerMessage.text,
-        recipients: recipients,
-        sendDirect: sendDirect,
-        sendFromDefaultSIM: false
-      );
+          message: _controllerMessage.text,
+          recipients: recipients,
+          sendDirect: sendDirect,
+          sendFromDefaultSIM: sendFromDefaultSIM);
       setState(() => _message = _result);
     } catch (error) {
       setState(() => _message = error.toString());

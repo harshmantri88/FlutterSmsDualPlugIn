@@ -1,6 +1,6 @@
 name: flutter_sms_dual
 description: Send SMS for Android dual SIM Directly
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/harshmantri88/FlutterSmsDualPlugIn.git
 
 environment:

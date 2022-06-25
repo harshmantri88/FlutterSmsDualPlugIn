@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.momentapps.fluttersmsdual.flutter_sms_dual_example">
      <uses-permission android:name="android.permission.SEND_SMS"/>
+     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
    <application
         android:label="flutter_sms_dual_example"
         android:name="${applicationName}"

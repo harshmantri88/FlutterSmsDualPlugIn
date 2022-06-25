@@ -121,7 +121,7 @@ class FlutterSmsDualPlugin:  FlutterPlugin, MethodCallHandler, ActivityAware {
         sendSMSDirectFromDefaultSIM(result, phones, message)
       }else{
         Log.e("Android_Print","11.5");
-        sendMessageFromSIM(result,phones, message,simIndex)
+        sendMessageFromSIM(result,message,phones, simIndex)
       }
     }
     else {
@@ -187,6 +187,7 @@ class FlutterSmsDualPlugin:  FlutterPlugin, MethodCallHandler, ActivityAware {
             mSmsManager.sendMultipartTextMessage(num, null, partMessage, null, null)
             result.success("SMS_SENT")
           } else {
+            Log.e("Android_Print","5  : "+localSubscriptionManager.activeSubscriptionInfoCount.toString()+"     "+smsText+"    "+num);
             if (localSubscriptionManager.activeSubscriptionInfoCount >= 1 && sendFromSim ==0) {
               Log.e("Android_Print","5.1");
               val simInfo1 = localList[0] as SubscriptionInfo
@@ -201,7 +202,7 @@ class FlutterSmsDualPlugin:  FlutterPlugin, MethodCallHandler, ActivityAware {
               }
 
             }else if (localSubscriptionManager.activeSubscriptionInfoCount > 1 && sendFromSim ==1){
-              Log.e("Android_Print","5.2");
+              Log.e("Android_Print","5.2  : "+num.toString()+"     "+smsText);
               val simInfo2 = localList[1] as SubscriptionInfo
               //SendSMS From SIM Two
               if (num.length == 1){

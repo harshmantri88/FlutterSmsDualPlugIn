@@ -11,7 +11,7 @@ class FlutterSmsDual {
     required String message,
     required List<String> recipients,
     bool sendDirect = false,
-    bool sendFromDefaultSIM = true,
+    bool sendFromDefaultSIM = false,
     String sim = "1",
   }) {
     final mapData = <dynamic, dynamic>{};
@@ -26,7 +26,7 @@ class FlutterSmsDual {
       mapData['recipients'] = _phones;
       mapData['sendDirect'] = sendDirect;
       mapData['sim'] = sim;
-      mapData['sendFromDefaultSIM'] = true;
+      mapData['sendFromDefaultSIM'] = sendFromDefaultSIM;
       return _channel
           .invokeMethod<String>('sendSMS', mapData)
           .then((value) => value ?? 'Error sending sms');

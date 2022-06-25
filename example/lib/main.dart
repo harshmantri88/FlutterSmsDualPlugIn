@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
         message: _controllerMessage.text,
         recipients: recipients,
         sendDirect: sendDirect,
+        sendFromDefaultSIM: false
       );
       setState(() => _message = _result);
     } catch (error) {

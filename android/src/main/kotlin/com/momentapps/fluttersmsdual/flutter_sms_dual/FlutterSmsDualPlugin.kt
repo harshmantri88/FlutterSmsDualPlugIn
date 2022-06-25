@@ -109,13 +109,18 @@ class FlutterSmsDualPlugin:  FlutterPlugin, MethodCallHandler, ActivityAware {
   }
 
   private fun sendSMS(result: Result, phones: String, message: String, sendDirect: Boolean, sendFromDefaultSIM:Boolean, simIndex:Int) {
+    Log.e("Android_Print","11");
     if (sendDirect && sendFromDefaultSIM) {
+      Log.e("Android_Print","11.2");
       sendSMSDirectFromDefaultSIM(result, phones, message)
     } else if(sendDirect && !sendFromDefaultSIM){
+      Log.e("Android_Print","11.3");
       // After LOLLIPOP we can send SMS from 2nd SIM Directly
       if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1){
+        Log.e("Android_Print","11.4");
         sendSMSDirectFromDefaultSIM(result, phones, message)
       }else{
+        Log.e("Android_Print","11.5");
         sendMessageFromSIM(result,phones, message,simIndex)
       }
     }
@@ -182,7 +187,7 @@ class FlutterSmsDualPlugin:  FlutterPlugin, MethodCallHandler, ActivityAware {
             mSmsManager.sendMultipartTextMessage(num, null, partMessage, null, null)
             result.success("SMS_SENT")
           } else {
-            if (localSubscriptionManager.activeSubscriptionInfoCount >= 1 && sendFromSim ==1) {
+            if (localSubscriptionManager.activeSubscriptionInfoCount >= 1 && sendFromSim ==0) {
               Log.e("Android_Print","5.1");
               val simInfo1 = localList[0] as SubscriptionInfo
               //SendSMS From SIM One
@@ -195,7 +200,7 @@ class FlutterSmsDualPlugin:  FlutterPlugin, MethodCallHandler, ActivityAware {
                 result.success("SMS_SENT")
               }
 
-            }else if (localSubscriptionManager.activeSubscriptionInfoCount > 1 && sendFromSim ==2){
+            }else if (localSubscriptionManager.activeSubscriptionInfoCount > 1 && sendFromSim ==1){
               Log.e("Android_Print","5.2");
               val simInfo2 = localList[1] as SubscriptionInfo
               //SendSMS From SIM Two
